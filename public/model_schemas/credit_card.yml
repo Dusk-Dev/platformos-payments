@@ -17,4 +17,6 @@ properties:
   type: integer
 - name: last4
   type: string
+- name: is_remembered
+  type: boolean
 

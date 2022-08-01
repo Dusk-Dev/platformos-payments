@@ -24,6 +24,13 @@
       {%- assign customization = g.customization_update %}
       {% log g, type: "DEBUG g" %}
     {% else %}
+      {% liquid
+        assign is_remembered = '{}' | parse_json
+        hash_assign is_remembered["name"] = 'is_remembered'
+        hash_assign is_remembered["value"] = data.is_remembered
+        
+        assign response_data.properties = response_data.properties | add_to_array: is_remembered
+      %}
       {%- graphql g = "modules/payments/create_customization", form: form_name, data: response_data -%}
       {% assign log_type = request_type | append: ' CREATED' %}
       {%- log g, type: log_type %}

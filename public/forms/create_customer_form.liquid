@@ -14,6 +14,9 @@ fields:
       validation:
         presence: true
     external_id:
+    is_remembered:
+      property_options:
+        virtual: true
     source:
       property_options:
         virtual: true
@@ -39,7 +42,8 @@ callback_actions: >
             { "name": "brand", "value": "{{ form.properties.card_brand }}" },
             { "name": "exp_month", "value": "{{ form.properties.card_exp_month }}" },
             { "name": "exp_year", "value": "{{ form.properties.card_exp_year }}" },
-            { "name": "last4", "value": "{{ form.properties.card_last4 }}"}
+            { "name": "last4", "value": "{{ form.properties.card_last4 }}"},
+            { "name": "is_remembered", "value": "{{ form.properties.is_remembered }}" }
           ]
         }
       {% endparse_json %}
