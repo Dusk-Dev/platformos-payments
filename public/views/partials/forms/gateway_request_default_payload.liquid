@@ -25,11 +25,16 @@
       {% log g, type: "DEBUG g" %}
     {% else %}
       {% liquid
-        assign is_remembered = '{}' | parse_json
-        hash_assign is_remembered["name"] = 'is_remembered'
-        hash_assign is_remembered["value"] = data.is_remembered
-        
-        assign response_data.properties = response_data.properties | add_to_array: is_remembered
+        log data.is_remembered, type: "DEBUG data.is_remembered"
+        log form_name
+        if form_name == "modules/payments/create_customer_form"
+          assign is_remembered = '{}' | parse_json
+          hash_assign is_remembered["name"] = 'is_remembered'
+          hash_assign is_remembered["value"] = data.is_remembered
+          
+          assign response_data.properties = response_data.properties | add_to_array: is_remembered
+        endif
+
       %}
       {%- graphql g = "modules/payments/create_customization", form: form_name, data: response_data -%}
       {% assign log_type = request_type | append: ' CREATED' %}
