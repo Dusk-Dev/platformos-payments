@@ -1,0 +1,14 @@
+query get_subscription_by_gateway_id($id: String!) {
+  customizations(
+    per_page: 1
+    name: "modules/payments/subscription"
+    is_deleted: false
+    id:  $id
+  ) {
+    results {
+      id
+      gateway_id: property(name: "gateway_id")
+      properties
+    }
+  }
+}

@@ -1,0 +1,26 @@
+---
+properties:
+- name: gateway_id
+- name: credit_card_id
+- name: description
+- name: currency
+- name: customer_id
+- name: paid_at
+  type: datetime
+- name: status
+- name: response_errors
+- name: start_date
+  type: integer
+- name: collection_method
+- name: external_id
+- name: latest_invoice
+- name: cancel_at_period_end
+  type: boolean
+- name: plan_id
+- name: interval
+- name: product_id
+- name: cancel_at
+  type: integer
+- name: canceled_at
+  type: integer
+---

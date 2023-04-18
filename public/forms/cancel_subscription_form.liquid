@@ -1,0 +1,16 @@
+---
+name: cancel_subscription_form
+resource: modules/payments/subscription
+request_allowed: false
+resource_owner: anyone
+flash_notice: "Successfully cancelled!"
+flash_alert: "Subscription cancel failed!"
+fields:
+  properties:
+    cancel_at_period_end:
+    cancel_at:
+    canceled_at:
+default_payload: >
+authorization_policies:
+---
+

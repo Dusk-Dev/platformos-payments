@@ -1,0 +1,60 @@
+mutation create_subscription(
+  $gateway_id: String
+  $credit_card_id: String
+  $description: String
+  $customer_id: String
+  $paid_at: String
+  $collection_method: String
+  $external_id: String
+  $start_date: Int
+  $status: String
+  $latest_invoice: String
+  $cancel_at_period_end: Boolean
+  $plan_id: String
+  $interval: String
+  $product_id: String
+  $cancel_at: Int
+  $canceled_at: Int
+) {
+  model_create(
+    model: {
+      model_schema_name: "modules/payments/subscription"
+      properties: [
+        { name: "gateway_id", value: $gateway_id }
+        { name: "credit_card_id", value: $credit_card_id }
+        { name: "description", value: $description }
+        { name: "customer_id", value: $customer_id }
+        { name: "paid_at", value: $paid_at }
+        { name: "collection_method", value: $collection_method }
+        { name: "external_id", value: $external_id }
+        { name: "start_date", value_int: $start_date }
+        { name: "status", value: $status }
+        { name: "latest_invoice", value: $latest_invoice }
+        { name: "cancel_at_period_end", value: $cancel_at_period_end }
+        { name: "plan_id", value: $plan_id }
+        { name: "interval", value: $interval }
+        { name: "product_id", value: $product_id }
+        { name: "cancel_at", value_int: $cancel_at }
+        { name: "canceled_at", value_int: $canceled_at }
+      ]
+    }
+  ) {
+    id
+    gateway_id: property(name: "gateway_id")
+    credit_card_id: property(name: "credit_card_id")
+    description: property(name: "description")
+    customer_id: property(name: "customer_id")
+    paid_at: property(name: "paid_at")
+    collection_method: property(name: "collection_method")
+    external_id: property(name: "external_id")
+    start_date: property(name: "start_date")
+    status: property(name: "status")
+    latest_invoice: property(name: "latest_invoice")
+    cancel_at_period_end: property(name: "cancel_at_period_end")
+    plan_id: property(name: "plan_id")
+    interval: property(name: "interval")
+    product_id: property(name: "product_id")
+    cancel_at: property(name: "cancel_at")
+    canceled_at: property(name: "canceled_at")
+  }
+}

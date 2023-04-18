@@ -3,6 +3,7 @@ query get_webhook_endpoints(
   $page: Int = 1
   $livemode: String
   $url: String
+  $is_connect: Boolean
 ) {
   customizations(
     per_page: $per_page
@@ -13,6 +14,7 @@ query get_webhook_endpoints(
     properties: [
       {name: "livemode", value: $livemode}
       {name: "url", value: $url}
+      {name: "is_connect", value: $is_connect}
     ]
   ) {
     results {

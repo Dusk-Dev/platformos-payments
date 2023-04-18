@@ -1,0 +1,40 @@
+---
+name: create_subscription_form
+resource: modules/payments/subscription
+request_allowed: false
+resource_owner: anyone
+flash_notice: "Successfully subscribed!"
+flash_alert: "Subscription failed!"
+fields:
+  properties:
+    gateway_id:
+      validation:
+        presence: true
+    credit_card_id:
+      validation:
+        presence: false
+    currency:
+    description:
+    external_id:
+    customer_id:
+      validation:
+        presence: false
+    external_id:
+    response_errors:
+      validation:
+        absence: true
+    paid_at:
+    collection_method:
+    start_date:
+    status:
+    latest_invoice:
+    cancel_at_period_end:
+    plan_id:
+    interval:
+    product_id:
+    cancel_at:
+    canceled_at:
+default_payload: >
+authorization_policies:
+---
+

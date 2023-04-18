@@ -1,0 +1,25 @@
+mutation update_item(
+  $id: ID!
+  $cancel_at_period_end: Boolean
+  $cancel_at: Int
+  $canceled_at: Int
+) {
+  record: record_update(
+    id: $id
+    record: {
+      table: "modules/payments/subscription"
+      properties: [
+        { name: "cancel_at_period_end" value_boolean: $cancel_at_period_end }
+        { name: "cancel_at" value_int: $cancel_at }
+        { name: "canceled_at" value_int: $canceled_at }
+      ]
+    }
+  ){
+    id
+    cancel_at_period_end: property(name: "cancel_at_period_end")
+    cancel_at: property(name: "cancel_at")
+    canceled_at: property(name: "canceled_at")
+  }
+}
+
+

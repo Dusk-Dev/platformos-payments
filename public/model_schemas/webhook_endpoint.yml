@@ -12,3 +12,5 @@ properties:
   type: string
 - name: secret
   type: string
+- name: is_connect
+  type: boolean
