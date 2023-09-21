@@ -6,8 +6,8 @@ authorization_policies:
 ---
 {%- include 'modules/stripe/shared/api_credentials' -%}
 
-{%log context, type: "webhook context"%}
-{%log params%}
+{% log context, type: "webhook context" %}
+{% log params %}
 
 {%- assign stripe_signature = context.headers.HTTP_STRIPE_SIGNATURE | split: "," %}
 {%- assign t = stripe_signature[0] | split: '=' | last %}
@@ -18,29 +18,36 @@ authorization_policies:
   {% assign is_connect = false %}
 {% endif %}
 
+{% if context.exports.payment.livemode != blank %}
+  {% assign livemode = true %}
+{% else %}
+  {% assign livemode = false %}
+{% endif %}
+
 {%- assign webhook_listen_url = "https://" | append: context.location.host | append: "/webhooks/listen" %}
-{% graphql g = 'modules/payments/get_webhook_endpoints',
-  livemode: context.exports.payment.livemode, url: webhook_listen_url, is_connect: is_connect %}
+{% graphql webhook_config = 'modules/payments/get_webhook_endpoint',
+  livemode: livemode, url: webhook_listen_url, is_connect: is_connect
+  | dig: 'models', 'results'
+  | first
+%}
 
-{%- assign last_webhook_config = g.customizations.results.last %}
+{% log webhook_config, type: 'webhook endpoint' %}
 
-{% if last_webhook_config.id == blank %}
+{% if webhook_config.id == blank %}
   {% log "webhook_endpoint NOT FOUND", type: "ERROR" %}
 {% endif %}
 
 {%- capture "signed_payload" -%}{{ t }}.{{ context.post_params }}{% endcapture %}
 
-{%- assign webhook_secret = last_webhook_config.properties.secret %}
+{%- assign webhook_secret = webhook_config.properties.secret %}
 {%- assign signed_payload_hmac = signed_payload | compute_hmac: webhook_secret %}
 
 {% if secret == signed_payload_hmac %}
   {% parse_json 'webhook_data' %}{{ context.post_params }}{% endparse_json %}
-  {%- assign gateway = context.exports.payments.gateway_name -%}
+  
   {%- assign webhook_processor = "modules/stripe/webhook_processors/" | append: webhook_name -%}
   {%- include webhook_processor, data: webhook_data.data.object, webhook_data: webhook_data -%}
 {% else %}
   {% response_status 403 %}
   {% log 'DEBUG secret not match', type: 'payments_webhook_listen' %}
 {% endif %}
-
-

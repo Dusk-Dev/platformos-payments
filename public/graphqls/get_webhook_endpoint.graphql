@@ -1,0 +1,24 @@
+query get_webhook_endpoint(
+  $page: Int = 1
+  $livemode: Boolean
+  $url: String
+  $is_connect: Boolean
+) {
+  models(
+    per_page: 1
+    page: $page
+    filter: {
+      model_schema_name: { value: "modules/payments/webhook_endpoint" }
+      properties: [
+        {name: "livemode", value_boolean: $livemode}
+        {name: "url", value: $url}
+        {name: "is_connect", value_boolean: $is_connect}
+      ]
+    }
+  ) {
+    results {
+      id
+      properties
+    }
+  }
+}
