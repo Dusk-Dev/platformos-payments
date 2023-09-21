@@ -3,6 +3,17 @@ properties:
 - name: name
 - name: abrv
 - name: price_id
+- name: price
+  type: float
 - name: is_monthly
   type: boolean
+- name: fee
+  type: float
+- name: featured_listings_limit
+  type: integer
+
+  # Type of permissions
+  # auctions, warehouse, verified, studio
+- name: permissions
+  type: array
 ---

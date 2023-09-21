@@ -1,12 +1,11 @@
-query get_sub_tier_by_abrv($abrv: String!, $is_monthly: Boolean!) {
+query get_sub_tier_by_abrv($price_id: String!) {
   records(
     per_page: 1
     filter: {
       table: { value: "modules/payments/subscription_tier" }
       deleted_at: {exists: false}
       properties: [
-        { name: "abrv", value: $abrv }
-        { name: "is_monthly", value_boolean: $is_monthly }
+        { name: "price_id", value: $price_id }
       ]
     }
   ) {
@@ -17,6 +16,7 @@ query get_sub_tier_by_abrv($abrv: String!, $is_monthly: Boolean!) {
       is_monthly: property_boolean(name: "is_monthly")
       price_id: property(name: "price_id")
       price: property_float(name: "price")
+      fee: property_float(name: "fee")
     }
   }
 }
