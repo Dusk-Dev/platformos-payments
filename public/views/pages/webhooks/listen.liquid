@@ -14,8 +14,12 @@ authorization_policies:
 {%- assign secret = stripe_signature[1] | split: '=' | last %}
 {%- assign webhook_name = params.type | replace: ".", "_" -%}
 
+{% log webhook_name, type: 'webhook name' %}
+
 {% if webhook_name contains "subscription" %}
   {% assign is_connect = false %}
+{% else %}
+  {% assign is_connect = true %}
 {% endif %}
 
 {% if context.exports.payment.livemode != blank %}

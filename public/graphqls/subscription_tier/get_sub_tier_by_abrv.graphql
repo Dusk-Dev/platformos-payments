@@ -17,6 +17,7 @@ query get_sub_tier_by_abrv($abrv: String!, $is_monthly: Boolean!) {
       is_monthly: property_boolean(name: "is_monthly")
       price_id: property(name: "price_id")
       price: property_float(name: "price")
+      permissions: property_array(name: "permissions")
     }
   }
 }
