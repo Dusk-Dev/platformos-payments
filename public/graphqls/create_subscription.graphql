@@ -15,6 +15,7 @@ mutation create_subscription(
   $product_id: String
   $cancel_at: Int
   $canceled_at: Int
+  $sub_item_id: String
 ) {
   model_create(
     model: {
@@ -36,6 +37,7 @@ mutation create_subscription(
         { name: "product_id", value: $product_id }
         { name: "cancel_at", value_int: $cancel_at }
         { name: "canceled_at", value_int: $canceled_at }
+        { name: "sub_item_id", value: $sub_item_id }
       ]
     }
   ) {

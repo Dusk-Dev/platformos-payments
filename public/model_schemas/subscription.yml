@@ -23,4 +23,5 @@ properties:
   type: integer
 - name: canceled_at
   type: integer
+- name: sub_item_id
 ---
