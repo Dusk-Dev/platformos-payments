@@ -4,6 +4,9 @@ mutation update_item(
   $cancel_at_period_end: Boolean
   $cancel_at: Int
   $canceled_at: Int
+  $plan_id: String
+  $interval: String
+  $sub_item_id: String
 ) {
   record: record_update(
     id: $id
@@ -14,6 +17,9 @@ mutation update_item(
         { name: "cancel_at" value_int: $cancel_at }
         { name: "canceled_at" value_int: $canceled_at }
         { name: "status" value: $status }
+        { name: "plan_id" value: $plan_id }
+        { name: "interval" value: $interval }
+        { name: "sub_item_id" value: $sub_item_id }
       ]
     }
   ){
@@ -22,5 +28,8 @@ mutation update_item(
     cancel_at: property(name: "cancel_at")
     canceled_at: property(name: "canceled_at")
     status: property(name: "status")
+    plan_id: property(name: "plan_id")
+    interval: property(name: "interval")
+    sub_item_id: property(name: "sub_item_id")
   }
 }
