@@ -18,6 +18,7 @@ query get_sub_tier_by_abrv($abrv: String!, $is_monthly: Boolean!) {
       price_id: property(name: "price_id")
       price: property_float(name: "price")
       permissions: property_array(name: "permissions")
+      featured_listings_limit: property_int(name: "featured_listings_limit")
     }
   }
 }
