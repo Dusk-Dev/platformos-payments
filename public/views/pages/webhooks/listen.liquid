@@ -22,13 +22,18 @@ authorization_policies:
   {% assign is_connect = true %}
 {% endif %}
 
-{% if context.exports.payment.livemode != blank %}
+{% if context.constants.payment_livemode != blank %}
   {% assign livemode = true %}
 {% else %}
   {% assign livemode = false %}
 {% endif %}
 
 {%- assign webhook_listen_url = "https://" | append: context.location.host | append: "/webhooks/listen" %}
+
+{% log webhook_listen_url, type: 'webhook listen url' %}
+{% log livemode, type: 'livemode' %}
+{% log is_connect, type: 'connect' %}
+
 {% graphql webhook_config = 'modules/payments/get_webhook_endpoint',
   livemode: livemode, url: webhook_listen_url, is_connect: is_connect
   | dig: 'models', 'results'
