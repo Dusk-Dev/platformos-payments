@@ -16,7 +16,7 @@ authorization_policies:
 
 {% log webhook_name, type: 'webhook name' %}
 
-{% if webhook_name contains "subscription" %}
+{% if webhook_name contains "subscription" or webhook_name contains "checkout" %}
   {% assign is_connect = false %}
 {% else %}
   {% assign is_connect = true %}

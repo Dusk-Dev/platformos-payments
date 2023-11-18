@@ -1,0 +1,6 @@
+---
+properties:
+- name: gateway_id
+- name: price_id
+- name: external_id
+---

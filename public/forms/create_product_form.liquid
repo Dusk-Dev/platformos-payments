@@ -1,0 +1,17 @@
+---
+name: create_product_form
+resource: modules/payments/product
+request_allowed: false
+resource_owner: anyone
+flash_notice: "Successfully created!"
+flash_alert: "Failed!"
+fields:
+  properties:
+    gateway_id:
+      validation:
+        presence: true
+    price_id:
+    external_id:
+default_payload: >
+authorization_policies:
+---

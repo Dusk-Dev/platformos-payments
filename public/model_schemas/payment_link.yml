@@ -1,0 +1,6 @@
+---
+properties:
+- name: gateway_id
+- name: url
+- name: external_id
+---

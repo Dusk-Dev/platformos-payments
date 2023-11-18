@@ -1,0 +1,17 @@
+---
+name: create_payment_link_form
+resource: modules/payments/payment_link
+request_allowed: false
+resource_owner: anyone
+flash_notice: "Successfully created!"
+flash_alert: "Failed!"
+fields:
+  properties:
+    gateway_id:
+      validation:
+        presence: true
+    url:
+    external_id:
+default_payload: >
+authorization_policies:
+---
