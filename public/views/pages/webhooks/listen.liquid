@@ -46,7 +46,8 @@ authorization_policies:
   {% log "webhook_endpoint NOT FOUND", type: "ERROR" %}
 {% endif %}
 
-{%- capture "signed_payload" -%}{{ t }}.{{ context.post_params }}{% endcapture %}
+{% assign signed_payload = t | append: '.' | append: context.post_params %}
+
 
 {%- assign webhook_secret = webhook_config.properties.secret %}
 {%- assign signed_payload_hmac = signed_payload | compute_hmac: webhook_secret %}
